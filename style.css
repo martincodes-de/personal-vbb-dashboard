@@ -1,3 +1,7 @@
 .db-red-background {
     background-color: #ec0016;
 }
+
+dl {
+    font-size: medium;
+}

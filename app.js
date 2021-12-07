@@ -2,7 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             isLoadingSpinnerActive: false,
-            stations: ["Station 1", "Station 2"],
+            stations: ["Berlin Alexanderplatz", "Station 2"],
             settings: {
                 showSettingsSuccessAlert: false,
                 refreshTimeInSeconds: 30

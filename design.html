@@ -54,12 +54,38 @@
                     <div class="card-header">
                         <h5>{{ station }}</h5>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-none">
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            An item
+                            <b>U5 Höhnow</b> <span class="float-lg-end">um 22:34 Uhr</span>
+
+                            <div class="d-grid gap-1 d-md-flex my-1">
+                                <span class="badge bg-primary">Verspätung</span>
+                                <span class="badge bg-danger">Fällt aus</span>
+                            </div>
+
+                            <details>
+                                <summary>Details</summary>
+                                <dl>
+                                    <dt>Abfahrt</dt>
+                                    <dd>27.07.2021</dd>
+
+                                    <dt>Abfahrt geplant</dt>
+                                    <dd>28.07.2021</dd>
+
+                                    <dt>Verspätung in Minuten</dt>
+                                    <dd>10</dd>
+
+                                    <dt>Hinweise</dt>
+                                    <dd>
+                                        <ul>
+                                            <li>test123</li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </details>
                         </li>
                         <li class="list-group-item">A second item</li>
                         <li class="list-group-item">A third item</li>
