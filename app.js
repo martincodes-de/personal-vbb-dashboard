@@ -3,6 +3,7 @@ const app = Vue.createApp({
         return {
             isLoadingSpinnerActive: false,
             stations: ["Station 1", "Station 2"],
+            refreshTimeInSeconds: 30
         }
     },
 

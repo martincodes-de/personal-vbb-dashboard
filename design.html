@@ -36,7 +36,7 @@
                 <div class="modal-body">
                     <p>Hier kannst du deine Einstellungen ändern.</p>
                     <label for="refreshTimeInSeconds">Aktualisieren in Sekunden</label>
-                    <input id="refreshTimeInSeconds" type="number" min="30"  placeholder="Aktualisieren in Sekunden" value="30" class="form-control">
+                    <input id="refreshTimeInSeconds" type="number" min="30"  placeholder="Aktualisieren in Sekunden" v-model="refreshTimeInSeconds" class="form-control">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success">Speichern</button>
