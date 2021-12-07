@@ -22,11 +22,26 @@ const app = Vue.createApp({
             }, 5000);
 
             localStorage.setItem("settings", JSON.stringify(settings));
+        },
+
+        loadSettingsFromLocalStorage() {
+            let savedSettings = localStorage.getItem("settings");
+
+            if (savedSettings !== null) {
+                let savedSettingsObject = JSON.parse(savedSettings);
+                this.settings.refreshTimeInSeconds = savedSettingsObject.refreshTimeInSeconds;
+            } else {
+                console.info("Keine Einstellungen wurden gespeichert / gefunden!");
+            }
         }
     },
 
     computed: {
 
+    },
+
+    beforeMount() {
+        this.loadSettingsFromLocalStorage();
     }
 });
 
