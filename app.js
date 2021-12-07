@@ -3,12 +3,26 @@ const app = Vue.createApp({
         return {
             isLoadingSpinnerActive: false,
             stations: ["Station 1", "Station 2"],
-            refreshTimeInSeconds: 30
+            settings: {
+                showSettingsSuccessAlert: false,
+                refreshTimeInSeconds: 30
+            }
         }
     },
 
     methods: {
+        saveSettingsInLocalStorage(event) {
+            let settings = {
+                refreshTimeInSeconds: this.settings.refreshTimeInSeconds
+            }
 
+            this.settings.showSettingsSuccessAlert = true;
+            setTimeout(() => {
+                this.settings.showSettingsSuccessAlert = false;
+            }, 5000);
+
+            localStorage.setItem("settings", JSON.stringify(settings));
+        }
     },
 
     computed: {

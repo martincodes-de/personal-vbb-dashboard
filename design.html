@@ -34,12 +34,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="alert alert-success" v-if="settings.showSettingsSuccessAlert">Einstellungen im lokalen Speicher deines Browsers gespeichert.</div>
                     <p>Hier kannst du deine Einstellungen ändern.</p>
                     <label for="refreshTimeInSeconds">Aktualisieren in Sekunden</label>
-                    <input id="refreshTimeInSeconds" type="number" min="30"  placeholder="Aktualisieren in Sekunden" v-model="refreshTimeInSeconds" class="form-control">
+                    <input id="refreshTimeInSeconds" type="number" min="30"  placeholder="Aktualisieren in Sekunden" v-model="settings.refreshTimeInSeconds" class="form-control">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success">Speichern</button>
+                    <button type="button" class="btn btn-success" v-on:click="saveSettingsInLocalStorage($event)">Speichern für Wiederverwendung</button>
                 </div>
             </div>
         </div>
