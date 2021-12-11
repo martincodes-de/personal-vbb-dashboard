@@ -11,6 +11,11 @@ const app = Vue.createApp({
     },
 
     methods: {
+        setupApplication() {
+          this.isLoadingSpinnerActive = true;
+          this.isLoadingSpinnerActive = false;
+        },
+
         saveSettingsInLocalStorage(event) {
             let settings = {
                 refreshTimeInSeconds: this.settings.refreshTimeInSeconds
@@ -41,6 +46,7 @@ const app = Vue.createApp({
     },
 
     beforeMount() {
+        this.setupApplication();
         this.loadSettingsFromLocalStorage();
     }
 });
