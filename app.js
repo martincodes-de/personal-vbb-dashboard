@@ -6,7 +6,8 @@ const app = Vue.createApp({
             settings: {
                 showSettingsSuccessAlert: false,
                 refreshTimeInSeconds: 30
-            }
+            },
+            lastUpdated: new Date()
         }
     },
 
@@ -16,7 +17,7 @@ const app = Vue.createApp({
           this.isLoadingSpinnerActive = false;
         },
 
-        saveSettingsInLocalStorage(event) {
+        saveSettingsInLocalStorage() {
             let settings = {
                 refreshTimeInSeconds: this.settings.refreshTimeInSeconds
             }
@@ -42,7 +43,12 @@ const app = Vue.createApp({
     },
 
     computed: {
+        lastUpdatedOnlyHoursAndSeconds() {
+            let hours = this.lastUpdated.getHours();
+            let minutes = this.lastUpdated.getMinutes();
 
+            return hours + ":" + minutes;
+        }
     },
 
     beforeMount() {
