@@ -6,7 +6,7 @@ const app = Vue.createApp({
             stations: ["Berlin Alexanderplatz", "Station 2"],
             settings: {
                 showSettingsSuccessAlert: false,
-                refreshTimeInSeconds: 30
+                refreshTimeInSeconds: 180
             },
             lines: [],
             lastUpdated: new Date()
@@ -46,6 +46,7 @@ const app = Vue.createApp({
         fetchLines() {
             this.isLoadingSpinnerActive = true;
             this.lastUpdated = new Date();
+
             axios.get("https://personal-vbb-dashboard.ddev.site/api/station.php")
                 .then((response) => {
                     this.lines = response.data;

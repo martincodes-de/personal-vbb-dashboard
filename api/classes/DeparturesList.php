@@ -1,6 +1,15 @@
 <?php
 
 class DeparturesList {
+    private array $interestedLineNames = [
+        "U 2",
+        "U 5",
+        "RE 1",
+        "S 3",
+        "RB 14",
+        "S 9"
+    ];
+
     public function __construct(array $decodedAPIDataList) {
     }
 
@@ -11,7 +20,9 @@ class DeparturesList {
             $model = $departuresModels[$i];
             $departureViewModel = $this->createViewModel($model);
 
-            array_push($departuresViewModels, $departureViewModel);
+            if ($this->isDepartureInteresting($departureViewModel["name"], $this->interestedLineNames)) {
+                array_push($departuresViewModels, $departureViewModel);
+            }
         }
 
         return $departuresViewModels;
@@ -63,5 +74,21 @@ class DeparturesList {
         }
 
         return $seconds / 60;
+    }
+
+    private function isDepartureInteresting(string $name, array $interestedNames): bool {
+        $interestedCount = 0;
+
+        foreach ($interestedNames as $interestedName) {
+            if (str_contains($name, $interestedName)) {
+                $interestedCount++;
+            }
+        }
+
+        if ($interestedCount > 0) {
+            return true;
+        }
+
+        return false;
     }
 }
