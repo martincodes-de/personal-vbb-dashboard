@@ -6,11 +6,16 @@ class DeparturesList {
         "U 5",
         "RE 1",
         "S 3",
-        "RB 14",
-        "S 9"
+        "RB 14"
     ];
 
-    public function __construct(array $decodedAPIDataList) {
+    public function __construct() {
+
+    }
+
+    public function getRawDeparturesListFromDbApi(int $stopId, int $duration, bool $bus, bool $tram): array {
+        $apiData = file_get_contents("https://v5.db.transport.rest/stops/{$stopId}/departures?duration={$duration}&language=de&express=false&ferry=false&bus=false&tram=false");
+        return json_decode($apiData);
     }
 
     public function createDeparturesList(array $departuresModels): array {
@@ -64,6 +69,8 @@ class DeparturesList {
     private function createLineName(string $name, string $direction): string {
         $name = str_replace(", Berlin", "", $name);
         $direction = str_replace(", Berlin", "", $direction);
+        $name = str_replace("(Berlin)", "", $name);
+        $direction = str_replace("(Berlin)", "", $direction);
         return "{$name} {$direction}";
     }
 
