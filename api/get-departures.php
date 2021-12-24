@@ -16,7 +16,4 @@ $apiData = $departuresListManager->getRawDeparturesListFromDbApi($stopId, $durat
 $departures = $departuresListManager->createDeparturesList($apiData);
 
 header('Content-Type: application/json');
-echo json_encode([
-    "stationName" => $stationName,
-    "departures" => $departures
-]);
+echo json_encode($departures);
