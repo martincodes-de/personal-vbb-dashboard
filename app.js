@@ -3,7 +3,15 @@ const app = Vue.createApp({
         return {
             isLoadingSpinnerActive: false,
             showSettingsButton: false,
-            stations: ["Berlin Alexanderplatz", "Station 2"],
+            stations: [
+                {name: "Alexanderplatz", stopId: 8011155, busStopsIncluded: false, tramStopsIncluded: false, departures: []},
+                {name: "U Tierpark", stopId: 733088, busStopsIncluded: true, tramStopsIncluded: true, departures: []},
+                {name: "U Spittelmarkt", stopId: 732543, busStopsIncluded: false, tramStopsIncluded: false, departures: []},
+                {name: "S Karlshorst", stopId: 374336, busStopsIncluded: false, tramStopsIncluded: true, departures: []},
+                {name: "Erkner", stopId: 8013477, busStopsIncluded: false, tramStopsIncluded: false, departures: []},
+                {name: "Fürstenwalde/Spree", stopId: 8010120, busStopsIncluded: false, tramStopsIncluded: false, departures: []},
+                {name: "Alfred-Kowalke-Str. (HWR)", stopId: 733107, busStopsIncluded: false, tramStopsIncluded: true, departures: []},
+            ],
             settings: {
                 showSettingsSuccessAlert: false,
                 refreshTimeInSeconds: 30
@@ -47,11 +55,19 @@ const app = Vue.createApp({
             this.isLoadingSpinnerActive = true;
             this.lastUpdated = new Date();
 
-            axios.get("https://personal-vbb-dashboard.ddev.site/api/station.php")
-                .then((response) => {
-                    this.lines = response.data;
-                    this.isLoadingSpinnerActive = false;
-                });
+            for (let s = 0; s < this.stations.length ; s++) {
+                let stationDetails = this.stations[s];
+
+                axios.get("https://personal-vbb-dashboard.ddev.site/api/get-departures.php", {
+                    params: {stationName: stationDetails.name, duration: 30, stopId: stationDetails.stopId,
+                            busStopsIncluded: stationDetails.busStopsIncluded, tramStopsIncluded: stationDetails.tramStopsIncluded}
+                })
+                    .then((response) => {
+                        this.stations[s].departures = response.data;
+                    });
+            }
+
+            this.isLoadingSpinnerActive = false;
         }
     },
 

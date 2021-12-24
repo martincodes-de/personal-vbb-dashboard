@@ -53,13 +53,13 @@
             <div class="col mb-4" v-for="station in stations">
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{ station }}</h5>
+                        <h5>{{ station.name }}</h5>
                     </div>
                     <div class="card-body d-none">
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li v-for="line in lines" v-bind:key="line.updateableId" class="list-group-item">
+                        <li v-for="line in station.departures" v-bind:key="line.updateableId" class="list-group-item">
                             <b style="word-wrap: break-word">{{line.name}}</b> <span class="float-lg-end"><i class="bi bi-clock"></i> {{line.whenTime}} Uhr</span>
 
                             <div class="d-grid gap-1 d-md-flex my-1">
