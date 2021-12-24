@@ -6,7 +6,7 @@ const app = Vue.createApp({
             stations: ["Berlin Alexanderplatz", "Station 2"],
             settings: {
                 showSettingsSuccessAlert: false,
-                refreshTimeInSeconds: 180
+                refreshTimeInSeconds: 30
             },
             lines: [],
             lastUpdated: new Date()
