@@ -22,7 +22,7 @@
                     <span class="visually-hidden">Loading...</span>
                 </div>
 
-                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="bi bi-sliders"></i></button>
+                <button v-if="showSettingsButton" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#settingsModal"><i class="bi bi-sliders"></i></button>
             </div>
         </nav>
     </header>
@@ -59,32 +59,36 @@
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li v-for="line in lines" class="list-group-item">
-                            <b>{{line.name}}</b> <span class="float-lg-end"><i class="bi bi-clock"></i> {{line.whenTime}} Uhr</span>
+                        <li v-for="line in lines" v-bind:key="line.updateableId" class="list-group-item">
+                            <b style="word-wrap: break-word">{{line.name}}</b> <span class="float-lg-end"><i class="bi bi-clock"></i> {{line.whenTime}} Uhr</span>
 
                             <div class="d-grid gap-1 d-md-flex my-1">
                                 <span v-if="line.delay > 0" class="badge bg-primary">Verspätung</span>
-                                <span v-if="line.cancelled" class="badge bg-danger">Fällt aus</span>
+                                <span v-if="line.cancelled" class="badge bg-danger">Ausfall</span>
                             </div>
 
                             <details>
                                 <summary>Details</summary>
                                 <dl>
-                                    <dt>Abfahrt</dt>
-                                    <dd>27.07.2021</dd>
+                                    <dt>Abfahrt gem. Fahrplan</dt>
+                                    <dd>{{line.plannedWhen}}</dd>
 
-                                    <dt>Abfahrt geplant</dt>
-                                    <dd>28.07.2021</dd>
+                                    <div v-if="line.delay > 0">
+                                        <dt>Verspätung in Minuten</dt>
+                                        <dd>{{line.delay}}</dd>
 
-                                    <dt>Verspätung in Minuten</dt>
-                                    <dd>10</dd>
+                                        <dt>Abfahrt mit Verspätung</dt>
+                                        <dd>{{line.when}}</dd>
+                                    </div>
 
-                                    <dt>Hinweise</dt>
-                                    <dd>
-                                        <ul>
-                                            <li>test123</li>
-                                        </ul>
-                                    </dd>
+                                    <div class="d-none">
+                                        <dt>Hinweise</dt>
+                                        <dd>
+                                            <ul>
+                                                <li>test123</li>
+                                            </ul>
+                                        </dd>
+                                    </div>
                                 </dl>
                             </details>
                         </li>
