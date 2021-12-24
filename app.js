@@ -52,10 +52,9 @@ const app = Vue.createApp({
         },
 
         fetchLines() {
-            this.isLoadingSpinnerActive = true;
             this.lastUpdated = new Date();
-
             for (let s = 0; s < this.stations.length ; s++) {
+
                 let stationDetails = this.stations[s];
 
                 axios.get("https://personal-vbb-dashboard.ddev.site/api/get-departures.php", {
@@ -63,7 +62,11 @@ const app = Vue.createApp({
                             busStopsIncluded: stationDetails.busStopsIncluded, tramStopsIncluded: stationDetails.tramStopsIncluded}
                 })
                     .then((response) => {
+                        this.isLoadingSpinnerActive = true;
                         this.stations[s].departures = response.data;
+
+                        this.isLoadingSpinnerActive = false;
+                        console.log(this.isLoadingSpinnerActive);
                     });
             }
 
