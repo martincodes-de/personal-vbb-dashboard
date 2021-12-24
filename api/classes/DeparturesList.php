@@ -18,9 +18,12 @@ class DeparturesList {
     }
 
     private function createViewModel(stdClass $departure): array {
+        $name = $this->createLineName($departure->line->name, $departure->direction);
+        $when = $this->formatDateString($departure->when);
+
         return [
-            "name" => $this->createLineName($departure->line->name, $departure->direction),
-            "when" => $this->formatDateString($departure->when),
+            "name" => $name,
+            "when" => $when,
             "whenTime" => $this->formatDepartureTimeOnly($departure->when),
             "plannedWhen" => $this->formatDateString($departure->plannedWhen),
             "plannedWhenTime" => $this->formatDepartureTimeOnly($departure->plannedWhen),
@@ -29,7 +32,7 @@ class DeparturesList {
             "lastStation" => $departure->provenance,
             "notices" => $departure->remarks,
             "cancelled" => isset($departure->cancelled),
-            "updateableId" => $this->createUpdatableId($this->createLineName($departure->line->name, $departure->direction), $this->formatDateString($departure->when))
+            "updateableId" => $this->createUpdatableId($name, $when)
         ];
     }
 
