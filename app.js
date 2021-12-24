@@ -7,14 +7,15 @@ const app = Vue.createApp({
                 showSettingsSuccessAlert: false,
                 refreshTimeInSeconds: 30
             },
+            lines: [],
             lastUpdated: new Date()
         }
     },
 
     methods: {
         setupApplication() {
-          this.isLoadingSpinnerActive = true;
-          this.isLoadingSpinnerActive = false;
+          this.loadSettingsFromLocalStorage();
+          this.fetchLines();
         },
 
         saveSettingsInLocalStorage() {
@@ -39,6 +40,13 @@ const app = Vue.createApp({
             } else {
                 console.info("Keine Einstellungen wurden gespeichert / gefunden!");
             }
+        },
+
+        fetchLines() {
+            axios.get("https://personal-vbb-dashboard.ddev.site/api/station.php")
+                .then(function (response) {
+                    this.lines = response.data;
+                });
         }
     },
 
@@ -51,9 +59,8 @@ const app = Vue.createApp({
         }
     },
 
-    beforeMount() {
+    mounted() {
         this.setupApplication();
-        this.loadSettingsFromLocalStorage();
     }
 });
 
