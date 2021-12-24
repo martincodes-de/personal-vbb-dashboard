@@ -45,6 +45,7 @@ const app = Vue.createApp({
 
         fetchLines() {
             this.isLoadingSpinnerActive = true;
+            this.lastUpdated = new Date();
             axios.get("https://personal-vbb-dashboard.ddev.site/api/station.php")
                 .then((response) => {
                     this.lines = response.data;
@@ -57,6 +58,7 @@ const app = Vue.createApp({
         lastUpdatedOnlyHoursAndSeconds() {
             let hours = this.lastUpdated.getHours();
             let minutes = this.lastUpdated.getMinutes();
+            let milliseconds = this.lastUpdated.getMilliseconds();
 
             if (minutes < 10) {
                 minutes = "0"+minutes;
@@ -66,7 +68,11 @@ const app = Vue.createApp({
                 hours = "0"+hours;
             }
 
-            return hours + ":" + minutes;
+            if (milliseconds < 10) {
+                milliseconds = "0"+milliseconds;
+            }
+
+            return hours + ":" + minutes + ":" + milliseconds;
         }
     },
 
