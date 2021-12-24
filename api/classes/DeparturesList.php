@@ -29,7 +29,12 @@ class DeparturesList {
             "lastStation" => $departure->provenance,
             "notices" => $departure->remarks,
             "cancelled" => isset($departure->cancelled),
+            "updateableId" => $this->createUpdatableId($this->createLineName($departure->line->name, $departure->direction), $this->formatDateString($departure->when))
         ];
+    }
+
+    private function createUpdatableId(string $name, string $when): string {
+        return "id-{$name}-{$when}-only-vuejs";
     }
 
     private function formatDateString(string $date): string {
