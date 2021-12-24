@@ -14,20 +14,5 @@ $departuresListManager = new DeparturesList($decodedApiData);
 
 $departures = $departuresListManager->createDeparturesList($decodedApiData);
 
-/*for ($i = 0; $i < count($decodedApiData); $i++) {
-    $departure = [
-        "name" => $decodedApiData[$i]->line->name,
-        "when" => $decodedApiData[$i]->when,
-        "plannedWhen" => $decodedApiData[$i]->plannedWhen,
-        "delay" => $decodedApiData[$i]->delay,
-        "direction" => $decodedApiData[$i]->direction,
-        "lastStation" => $decodedApiData[$i]->provenance,
-        "notices" => $decodedApiData[$i]->remarks,
-        "cancelled" => isset($decodedApiData[$i]->cancelled),
-    ];
-
-    array_push($departures, $departure);
-}*/
-
 header('Content-Type: application/json');
 echo json_encode($departures);
