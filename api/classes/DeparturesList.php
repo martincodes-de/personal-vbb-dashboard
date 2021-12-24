@@ -6,7 +6,10 @@ class DeparturesList {
         "U 5",
         "RE 1",
         "S 3",
-        "RB 14"
+        "RB 14",
+        "STR M17",
+        "STR 27",
+        "STR 21"
     ];
 
     public function __construct() {
