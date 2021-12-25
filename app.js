@@ -57,7 +57,7 @@ const app = Vue.createApp({
 
                 let stationDetails = this.stations[s];
 
-                axios.get("https://personal-vbb-dashboard.ddev.site/api/get-departures.php", {
+                axios.get("api/get-departures.php", {
                     params: {stationName: stationDetails.name, duration: 30, stopId: stationDetails.stopId,
                             busStopsIncluded: stationDetails.busStopsIncluded, tramStopsIncluded: stationDetails.tramStopsIncluded}
                 })
