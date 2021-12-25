@@ -64,6 +64,7 @@
 
                             <div class="d-grid gap-1 d-md-flex my-1">
                                 <span v-if="line.delay > 0" class="badge bg-primary">Verspätung</span>
+                                <span v-if="line.notices.length > 0" class="badge bg-info">Hinweis</span>
                                 <span v-if="line.cancelled" class="badge bg-danger">Ausfall</span>
                             </div>
 
@@ -81,11 +82,11 @@
                                         <dd>{{line.when}}</dd>
                                     </div>
 
-                                    <div class="d-none">
+                                    <div v-if="line.notices.length > 0">
                                         <dt>Hinweise</dt>
                                         <dd>
                                             <ul>
-                                                <li>test123</li>
+                                                <li v-for="notice in line.notices">{{notice.text}}</li>
                                             </ul>
                                         </dd>
                                     </div>
